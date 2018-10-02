@@ -1,0 +1,1 @@
+Package that implements the methods developed in the paper "An empirical model of dyadic link formation in a network with unobserved heterogeneity".
