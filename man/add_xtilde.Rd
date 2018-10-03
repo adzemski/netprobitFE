@@ -10,6 +10,9 @@ add_xtilde(model, long, force_robust = FALSE)
 \item{model}{list that describes the model specification}
 
 \item{long}{data.table}
+
+\item{force_robust}{logical, force using numerically stable (but possibly slow)
+algorithm to fit probit}
 }
 \description{
 add xtilde's by reference

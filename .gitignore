@@ -4,6 +4,3 @@
 .DS_Store
 src/*.so
 src/*.o
-src/RcppExports.cpp
-R/Rexports.R
-R/RcppExports.R

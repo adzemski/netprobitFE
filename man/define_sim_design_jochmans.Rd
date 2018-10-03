@@ -18,8 +18,6 @@ define_sim_design_jochmans(N, theta, rho, type_C_N = "0")
 * "loglog"
 * "sqrt_log"
 * "log"}
-
-\item{S}{number of simulations}
 }
 \value{
 simulation design as list

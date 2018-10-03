@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{add_predict}
 \alias{add_predict}
-\title{add residuals (projected out of fixed effects) of a variable}
+\title{add predicted values or residuals under FE projection}
 \usage{
 add_predict(model, long, var_name, new_var_name,
   var_name_weights = "omega", force_robust = FALSE, residuals = TRUE)
@@ -15,7 +15,14 @@ add_predict(model, long, var_name, new_var_name,
 \item{var_name}{name of variable}
 
 \item{new_var_name}{name of new variable with residuals}
+
+\item{var_name_weights}{variable with weights}
+
+\item{force_robust}{logical, force using numerically stable (but possibly slow)
+algorithm to fit probit}
+
+\item{residuals}{logical, TRUE = compute residuals, FALSE = compute predicted values}
 }
 \description{
-add residuals (projected out of fixed effects) of a variable
+add predicted values or residuals under FE projection
 }

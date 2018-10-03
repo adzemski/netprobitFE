@@ -1,5 +1,5 @@
-## This R package implements the methods proposed in 
-## Dzemski, Andreas: An empirical model of dyadic link formation in 
+## This R package implements the methods proposed in
+## Dzemski, Andreas: An empirical model of dyadic link formation in
 ## a network with unobserved heterogeneity, Review of Economics and Statistics, forthcoming
 
 ## Copyright (C) 2018  Andreas Dzemski
@@ -230,7 +230,8 @@ triangle_test <- function(fit_ML, fit_ttest_theta, gammaS = fit_ML$gammaS_hat,
 #' @param alpha significance level
 #' @param trimming_bound bound for trimming small probabilities
 #' @param bias_estimator estimator of bias (see triangle test)
-#' @param force_robust
+#' @param force_robust logical, force using numerically stable (but possibly slow)
+#'  algorithm to fit probit
 #'
 #' @return list with bootstrapped SE and quantiles
 double_bootstrap <- function(wide, rho_bs0, model, bs_iterations = 200, alpha = 0.1,

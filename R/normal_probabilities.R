@@ -1,5 +1,5 @@
-## This R package implements the methods proposed in 
-## Dzemski, Andreas: An empirical model of dyadic link formation in 
+## This R package implements the methods proposed in
+## Dzemski, Andreas: An empirical model of dyadic link formation in
 ## a network with unobserved heterogeneity, Review of Economics and Statistics, forthcoming
 
 ## Copyright (C) 2018  Andreas Dzemski
@@ -142,6 +142,10 @@ partial_r_ystar1_ystar1 <- Vectorize(
 #' @param ystar1 ystar for ij link
 #' @param ystar2 ystar for ji link
 #' @param rho correlation (reciprocity parameter)
+#' @param r (optional) precomputed r
+#' @param r_rho (optional) precomputed r_rho
+#' @param r_ystar1 (optional) precomputed r_ystar1
+#' @param r_ystar1_rho (optional) precomputed r_ystar1_rho
 #'
 #' @return vector
 partial_J_ystar1 <-  Vectorize(

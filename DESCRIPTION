@@ -1,12 +1,12 @@
 Package: netprobitFE
 Title: Network probit with fixed effects
-Version: 0.0.2.0
+Version: 0.1.0.0
 Authors@R: person("Andreas", "Dzemski", email = "andreas.dzemski@gu.se", role = c("aut", "cre"))
 Description: Fit probit model with fixed effects to directional network model.
 Depends: R (>= 2.7.0)
-License: Fit probit model with fixed effects to directional network model
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
 LinkingTo: Rcpp
-Imports: data.table, speedglm, Rcpp, mnormt
+Imports: data.table, speedglm, Rcpp, mnormt, MASS, Matrix, stats4

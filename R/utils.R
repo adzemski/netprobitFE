@@ -1,5 +1,5 @@
-## This R package implements the methods proposed in 
-## Dzemski, Andreas: An empirical model of dyadic link formation in 
+## This R package implements the methods proposed in
+## Dzemski, Andreas: An empirical model of dyadic link formation in
 ## a network with unobserved heterogeneity, Review of Economics and Statistics, forthcoming
 
 ## Copyright (C) 2018  Andreas Dzemski
@@ -107,6 +107,8 @@ compute_ystar <- function(links, theta, gammaS, gammaR, X_names,
 #'
 #' @param model list that describes the model specification
 #' @param long data.table
+#' @param force_robust logical, force using numerically stable (but possibly slow)
+#'  algorithm to fit probit
 #'
 #' @import data.table
 add_xtilde <- function(model, long, force_robust = FALSE) {
@@ -116,12 +118,16 @@ add_xtilde <- function(model, long, force_robust = FALSE) {
   }
 }
 
-#' add residuals (projected out of fixed effects) of a variable
+#' add predicted values or residuals under FE projection
 #'
 #' @param model list that describes the model specification
 #' @param long data.table
 #' @param var_name name of variable
 #' @param new_var_name name of new variable with residuals
+#' @param var_name_weights variable with weights
+#' @param residuals logical, TRUE = compute residuals, FALSE = compute predicted values
+#' @param force_robust logical, force using numerically stable (but possibly slow)
+#'  algorithm to fit probit
 #'
 #' @import data.table
 add_predict <- function(model, long, var_name, new_var_name,

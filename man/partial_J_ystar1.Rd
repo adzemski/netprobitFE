@@ -13,6 +13,14 @@ partial_J_ystar1(ystar1, ystar2, rho, r = NULL, r_rho = NULL,
 \item{ystar2}{ystar for ji link}
 
 \item{rho}{correlation (reciprocity parameter)}
+
+\item{r}{(optional) precomputed r}
+
+\item{r_rho}{(optional) precomputed r_rho}
+
+\item{r_ystar1}{(optional) precomputed r_ystar1}
+
+\item{r_ystar1_rho}{(optional) precomputed r_ystar1_rho}
 }
 \value{
 vector

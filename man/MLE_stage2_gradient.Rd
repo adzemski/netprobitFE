@@ -18,6 +18,8 @@ MLE_stage2_gradient(wide, bound_lower, bound_upper, rho_start = 0,
 \item{rho_start}{starting value (default = 0)}
 
 \item{inital_search_radius}{intial search radius around starting value (default = 0.4)}
+
+\item{convergence_tol}{convergence tolerance}
 }
 \value{
 fitted model

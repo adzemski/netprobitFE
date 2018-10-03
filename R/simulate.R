@@ -1,5 +1,5 @@
-## This R package implements the methods proposed in 
-## Dzemski, Andreas: An empirical model of dyadic link formation in 
+## This R package implements the methods proposed in
+## Dzemski, Andreas: An empirical model of dyadic link formation in
 ## a network with unobserved heterogeneity, Review of Economics and Statistics, forthcoming
 
 ## Copyright (C) 2018  Andreas Dzemski
@@ -30,6 +30,8 @@
 #' @param bs_trimming_bound specify trimming of probabilities in bootstrap Monte Carlo
 #' @param force_robust don't use speedglm (for robustness in sparse networks)
 #' @param bs_force_robust don't use speedglm in bootstrap Monte Carlo
+#' @param triangles_bias_est specify how bias is estimated
+#' @param triangles_bs_inf specify typoe of bootstrap inference
 #'
 #' @return data frame with simulation results
 #' @export
@@ -228,7 +230,6 @@ draw_j18_dynamic_meeting <- function(design) {
 #'  * "loglog"
 #'  * "sqrt_log"
 #'  * "log"
-#' @param S number of simulations
 #'
 #' @return simulation design as list
 #' @export

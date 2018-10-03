@@ -1,5 +1,5 @@
-## This R package implements the methods proposed in 
-## Dzemski, Andreas: An empirical model of dyadic link formation in 
+## This R package implements the methods proposed in
+## Dzemski, Andreas: An empirical model of dyadic link formation in
 ## a network with unobserved heterogeneity, Review of Economics and Statistics, forthcoming
 
 ## Copyright (C) 2018  Andreas Dzemski
@@ -124,6 +124,7 @@ MLE_stage2_mle <- function(wide, bound_lower, bound_upper, rho_start = 0) {
 #' @param bound_upper upper bound on rho
 #' @param rho_start starting value (default = 0)
 #' @param inital_search_radius intial search radius around starting value (default = 0.4)
+#' @param convergence_tol convergence tolerance
 #'
 #' @return fitted model
 #'

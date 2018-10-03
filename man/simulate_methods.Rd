@@ -21,6 +21,10 @@ simulate_methods(sim_design, draw_network, num_simulations = 100,
 
 \item{stage2_method}{either "mle" or "gradient"}
 
+\item{triangles_bias_est}{specify how bias is estimated}
+
+\item{triangles_bs_inf}{specify typoe of bootstrap inference}
+
 \item{file_name}{file name for saving results (relative to path)
 if not provided then results are not saved to disk}
 

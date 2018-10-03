@@ -15,6 +15,8 @@ define_model(d, X_names = NULL, col_sender = "i", col_receiver = "j",
 \item{col_sender}{name of column that identifies sender}
 
 \item{col_receiver}{name of column that identifies receiver}
+
+\item{col_outcome}{name of column that identifies outcome}
 }
 \value{
 list describing the network model and data

@@ -1,5 +1,5 @@
-## This R package implements the methods proposed in 
-## Dzemski, Andreas: An empirical model of dyadic link formation in 
+## This R package implements the methods proposed in
+## Dzemski, Andreas: An empirical model of dyadic link formation in
 ## a network with unobserved heterogeneity, Review of Economics and Statistics, forthcoming
 
 ## Copyright (C) 2018  Andreas Dzemski
@@ -23,6 +23,7 @@
 #' @param X_names covariate names (NULL = no covariates)
 #' @param col_sender name of column that identifies sender
 #' @param col_receiver name of column that identifies receiver
+#' @param col_outcome name of column that identifies outcome
 #'
 #' @return list describing the network model and data
 #' @export

@@ -23,7 +23,8 @@ double_bootstrap(wide, rho_bs0, model, bs_iterations = 200,
 
 \item{bias_estimator}{estimator of bias (see triangle test)}
 
-\item{force_robust}{}
+\item{force_robust}{logical, force using numerically stable (but possibly slow)
+algorithm to fit probit}
 }
 \value{
 list with bootstrapped SE and quantiles
