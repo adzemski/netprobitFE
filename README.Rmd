@@ -1,0 +1,99 @@
+---
+title: "R Notebook"
+output: 
+  md_document:
+    variant: markdown_github
+---
+
+# netprobitFE
+
+R package that implements the methods developed in the paper 
+
+Dzemski, A: "An empirical model of dyadic link formation in a network with unobserved heterogeneity", Review of Economics and Statistics, forthcoming.
+
+## Installation
+
+The easiest way to install the package is to use the `devtools` package.
+Make sure that you have the `devtools` package installed and type:
+
+```R
+devtools::install_github("adzemski/netprobitFE")
+```
+
+## Example
+
+Let's use the package to simulate an example network with $N=50$ agents.
+
+```{r paged.print=FALSE}
+library(netprobitFE)
+# first define parameters of simulation
+sim_design <- define_sim_design_jochmans(N = 50, theta = 1, rho = 0.5, type_C_N = "loglog")
+# generate a network with these parameters
+set.seed(123)
+dyadic_data <- as.data.frame(draw_network_jochmans_2018(sim_design)$links)[, c("i", "j", "X1", "Y")]
+head(dyadic_data, n = 10)
+```
+
+Next, we tell the package about what data we are going to use and what model we are going to estimate.
+
+```{r}
+probit_model <- define_model(dyadic_data, X_names = "X1", col_sender = "i", col_receiver = "j",
+                                          col_outcome = "Y")
+```
+
+We now estimate the homophily parameter $\theta$ and the reciprocity parameter $\rho$ using the two-stage procedure 
+described in Section 2.2 of the paper.
+
+```{r}
+# stage 1
+fit_ML <- MLE_stage1(probit_model)
+fit_ML$theta_hat_MLE
+# stage 2
+fit_ML <- MLE_stage2(fit_ML)
+fit_ML$rho_hat_MLE
+```
+
+The procedure `ttest_theta` computes a bias-corrected estimate of $\theta$ and conducts $t$-tests that are robust to the incidental parameter problem. For example we can test significance, i.e., test $\theta$ against zero:
+
+```{r}
+fit_ttest_theta <- ttest_theta(fit_ML, theta0 = 0)
+fit_ttest_theta[c("theta_hat_bias_corr", "tstat_theta", "pval_theta")]
+```
+
+The test rejects at the 5% level. This means that `X1` is significant at the 5% level. Note that the bias-corrected estimate is indeed closer to the true value ($\theta = 1$) than the uncorrected ML estimate. We can also test against the true value of $\theta$:
+
+```{r}
+ttest_theta(fit_ML, theta0 = 1)[c("theta_hat_bias_corr", "tstat_theta", "pval_theta")]
+```
+
+Unsurprisingly, this test does not reject. 
+
+The procedure `ttest_rho` computes a bias-corrected estimate of $\rho$ and conducts $t$-tests that are robust to the incidental parameter problem. For example, we can test significance: 
+
+```{r}
+ttest_rho(fit_ML, fit_ttest_theta, rho0 = 0)[c("rho_hat_bias_corr", "pval_rho")]
+```
+
+The test rejects at the 5% level. This means that the within dyad shocks are correlated (95% confidence). Note that the bias-corrected estimate is indeed closer to the true value ($\rho = 0.5$) than the uncorrected ML estimate. We can also test against the true value of $\theta$:
+ 
+```{r}
+ttest_rho(fit_ML, fit_ttest_theta, rho0 = 0.5)[c("rho_hat_bias_corr", "pval_rho")]
+```
+
+This test rejects at the 5% level. 
+
+Finally, we test model specification using the transitivity test described in Section 5 of the paper. We set the nominal size of the test to $\alpha = 0.5$ and turn bootstrap inference on (as recommended in the paper).
+
+```{r}
+triangle_test(fit_ML, fit_ttest_theta, bs_inference = "double", 
+              bs_iterations = 200, alpha = 0.05)[c("excess_trans", "excess_trans_bias_corr", "teststat",
+                                                   "pval_analytic", "rej_bs_perc_t")]
+```
+
+The statistic `excess_trans_bias` is the naive excess transitivity measure $T_N$ from Section 5.2, the statistic `excess_trans_bias_corr` is the same statistic with analytic bias correction based on Theorem 3. Finally, `teststat` is the studentized robust test statistic given in equation (5.3). The percentile bootstrap does not reject (`rej_bs_perc_t = FALSE`). The analytical $p$-value is also greater than 5%. For this example, bootstrap and normal approximation both do not reject. 
+
+## License
+
+This software is open source software and is licensed under the [GNU General Public License 3.0][gnu 3.0]. 
+
+[gnu 3.0]: https://www.gnu.org/licenses/gpl-3.0.en.html
