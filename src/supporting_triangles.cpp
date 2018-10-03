@@ -29,8 +29,7 @@ using namespace Rcpp;
 //'
 //' @param df data frame with link data (ordered canonically)
 //' @param y_variable string that contains name of column that stores link indicator
-//'
-// //' @export
+//' @export
 //' @return number of supporting transitive triangles for this link
 // [[Rcpp::export]]
 NumericVector num_trans_closures (DataFrame df, std::string y_variable)
@@ -71,8 +70,7 @@ NumericVector num_trans_closures (DataFrame df, std::string y_variable)
 //'
 //' @param df data frame with link data (ordered canonically)
 //' @param y_variable string that contains name of column that stores link indicator
-//'
-// //' @export
+//' @export
 //' @return number of supporting transitive triangles for this link
 // [[Rcpp::export]]
 NumericVector num_in_triangles (DataFrame df, std::string y_variable)
@@ -91,10 +89,10 @@ NumericVector num_in_triangles (DataFrame df, std::string y_variable)
       {
         if (i == k) continue;
         if (j == k) continue;
-        
-        link[y.get_index(i, j)] += 
-          (static_cast<int>(y.get(i, k)) && static_cast<int>(y.get(k, j))) + 
-          (static_cast<int>(y.get(i, k)) && static_cast<int>(y.get(j, k))) + 
+
+        link[y.get_index(i, j)] +=
+          (static_cast<int>(y.get(i, k)) && static_cast<int>(y.get(k, j))) +
+          (static_cast<int>(y.get(i, k)) && static_cast<int>(y.get(j, k))) +
           (static_cast<int>(y.get(k, i)) && static_cast<int>(y.get(k, j)));
       }
     }
