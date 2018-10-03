@@ -2,9 +2,8 @@
 .Rhistory
 .RData
 .DS_Store
-.so
-.o
+src/*.so
+src/*.o
 src/RcppExports.cpp
 R/Rexports.R
 R/RcppExports.R
-man/*.Rd
