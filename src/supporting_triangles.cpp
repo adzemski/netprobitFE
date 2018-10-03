@@ -30,7 +30,7 @@ using namespace Rcpp;
 //' @param df data frame with link data (ordered canonically)
 //' @param y_variable string that contains name of column that stores link indicator
 //'
-//' @export
+// //' @export
 //' @return number of supporting transitive triangles for this link
 // [[Rcpp::export]]
 NumericVector num_trans_closures (DataFrame df, std::string y_variable)
@@ -72,7 +72,7 @@ NumericVector num_trans_closures (DataFrame df, std::string y_variable)
 //' @param df data frame with link data (ordered canonically)
 //' @param y_variable string that contains name of column that stores link indicator
 //'
-//' @export
+// //' @export
 //' @return number of supporting transitive triangles for this link
 // [[Rcpp::export]]
 NumericVector num_in_triangles (DataFrame df, std::string y_variable)
