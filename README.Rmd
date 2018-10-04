@@ -22,6 +22,8 @@ devtools::install_github("adzemski/netprobitFE")
 
 ## Example
 
+If you are interested in using this package you probably have your own network data that you want to analyze.
+For this demonstration, we start without any data and we will have to make some data up. 
 Let's use the package to simulate an example network with $N=50$ agents.
 
 ```{r paged.print=FALSE}
@@ -34,12 +36,16 @@ dyadic_data <- as.data.frame(draw_network_jochmans_2018(sim_design)$links)[, c("
 head(dyadic_data, n = 10)
 ```
 
-Next, we tell the package about what data we are going to use and what model we are going to estimate.
+Our analysis of the simulated network data in `dyadic_data` starts here.
+We start by telling the package about what data we are going to use and what model we are going to estimate.
 
 ```{r}
 probit_model <- define_model(dyadic_data, X_names = "X1", col_sender = "i", col_receiver = "j",
                                           col_outcome = "Y")
 ```
+
+The data is expected to be dataframe that contains the link-specific covariates, the link outcome ($0$ for no link, $1$ for a link), and the sender identifier and the receiver identifier. The unit identifier that specifies the sender and the receiver of a link can be a number or a string. 
+The data does not have to be ordered in a particular way but it has to be *complete* in the sense that it has to contain one row for every possible link (with $N$ agents there are $N(N-1)$ possible links). To specify more than one link-specific covariate use a vector. For example, if there are three covariates `X1`, `X2` and `X3` then replace `X_names = "X1"` by `X_names = c("X1, "X2", "X3")`.
 
 We now estimate the homophily parameter $\theta$ and the reciprocity parameter $\rho$ using the two-stage procedure 
 described in Section 2.2 of the paper.
@@ -82,7 +88,7 @@ ttest_rho(fit_ML, fit_ttest_theta, rho0 = 0.5)[c("rho_hat_bias_corr", "pval_rho"
 
 This test rejects at the 5% level. 
 
-Finally, we test model specification using the transitivity test described in Section 5 of the paper. We set the nominal size of the test to $\alpha = 0.5$ and turn bootstrap inference on (as recommended in the paper).
+Finally, we test model specification using the transitivity test described in Section 5 of the paper. We set the nominal size of the test to $\alpha = 0.5$ and turn bootstrap inference on (as recommended in the paper). Here we set the number of bootstrap iterations (`bs_iterations`) to $200$. The bootstrap is fairly expensive and this will take a while. On my computer the specification test takes about 37 seconds to execute. In practice, I recommend to use a much larger number of bootstrap iterations. 
 
 ```{r}
 triangle_test(fit_ML, fit_ttest_theta, bs_inference = "double", 
